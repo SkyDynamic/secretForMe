@@ -99,18 +99,18 @@ base64.b64encode(decrypt_result).decode()
 
 ### 编码过程
 ```python
-def encode(s):
+def encode(s, shift):
     compress_list = lzw_compress(string_to_unicode(s))
     byte_data = list2bytes(compress_list)
-    encrypted_data = caesar_encrypt_bytes(byte_data, 324)
+    encrypted_data = caesar_encrypt_bytes(byte_data, shift)
     return base64.b64encode(encrypted_data).decode()
 ```
 
 ### 解码过程
 ```python
-def decode(s):
+def decode(s, shift):
     decoded_data = base64.b64decode(s)
-    decrypted_data = caesar_decrypt_bytes(decoded_data, 324)
+    decrypted_data = caesar_decrypt_bytes(decoded_data, shift)
     decompressed_list = bytes2list(decrypted_data)
     decompressed_data = lzw_decompress(decompressed_list)
     return unicode_to_string(decompressed_data)
